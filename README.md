@@ -24,48 +24,48 @@ make 규칙은 다음과 같이 정의해 놓았다.
    `make on`을 했을 때 백그라운드로 실행되게 해보려고 했지만 안돼서 결국 하나의 터미널은 점유하게 되니 '참고'하시면 됩니다.   
    
 
-도커 이미지가 빌드되고, 컨테이너도 잘 실행되면 본격적으로 패킷 분석을 시작해 본다.
-1. 컨테이너 실행
+도커 이미지가 빌드되고, 컨테이너도 잘 실행되면 본격적으로 패킷 분석을 시작해 본다.   
+1. 컨테이너 실행   
    패킷 분석을 하기 위해서는 컨테이너 내부에서 실행해야 되는데, 해당 명령어는 다음과 같다.
    `docker exec -it irc bash`   
 
 
-2. 서버 실행
+2. 서버 실행   
    `inspircd` 서버의 경우 `setup.sh` bash 파일로 돌려놓았기 때문에 별도의 명령어 없이 운영되고 있을 것이다.   
 
 
-3. irssi 클라이언트로 서버 접속
-   `irssi` 클라이언트로 서버에 접속하는 방법은 다음의 명령어를 터미널에 입력하면 된다.
-   `irssi -c <ip address> -p <port> -n <nickname>`
-   -c : IP주소나 도메인을 입력
-   -p : 포트 번호를 입력
-   -n : 닉네임 입력
+3. irssi 클라이언트로 서버 접속   
+   `irssi` 클라이언트로 서버에 접속하는 방법은 다음의 명령어를 터미널에 입력하면 된다.   
+   `irssi -c <ip address> -p <port> -n <nickname>`   
+   -c : IP주소나 도메인을 입력   
+   -p : 포트 번호를 입력   
+   -n : 닉네임 입력   
 
-   우리는 로컬환경에서 실행할 것이고, 기본 inspircd 서버는 6667이므로
-   `irssi -c localhost -p 6667 -n test`
-   로 접석하면 된다.   
+   우리는 로컬환경에서 실행할 것이고, 기본 inspircd 서버는 6667이므로   
+   `irssi -c localhost -p 6667 -n test`   
+   로 접속하면 된다.   
 
 
-4. tcpflow로 메세지 확인
-   또 다른 터미널로 컨테이너에 접속해서
-   `tcpflow -i lo port 6667 -c`
-   를 입력하면 6667 포트로 지나가는 패킷의 데이터를 볼 수 있다.
-   -i : 인터페이스 지정 (IP주소, 도메인 등. lo : loopback - localhost)
-   port : 지정한 포트 번호
-   -c : 지나간 패킷의 정보를 console을 통해 stdout 해주는 옵션
+4. tcpflow로 메세지 확인   
+   또 다른 터미널로 컨테이너에 접속해서   
+   `tcpflow -i lo port 6667 -c`   
+   를 입력하면 6667 포트로 지나가는 패킷의 데이터를 볼 수 있다.   
+   -i : 인터페이스 지정 (IP주소, 도메인 등. lo : loopback - localhost)   
+   port : 지정한 포트 번호   
+   -c : 지나간 패킷의 정보를 console을 통해 stdout 해주는 옵션   
 
-   
-   출력 메세지 구조는 다음과 같다.
+      
+   출력 메세지 구조는 다음과 같다.   
    {sender}-{receiver}: {message}   
 
 
-5. inspircd 서버를 debug 옵션 주기
-   setup폴더의 bash 파일을 보면
-   `inspircd --runasroot --nofork`
-   로 실행을 하고 있는데 해당 명령어 뒤에 `--debug`를 추가하면 서버로 들어오는 패킷을 바로 볼 수 있다.
-   `inspircd --runasroot --nofork --debug`
-   이건 해도 되고 안 해도 되고 취향에 맞게 설정하면 된다.   
+5. inspircd 서버를 debug 옵션 주기   
+   setup폴더의 bash 파일을 보면   
+   `inspircd --runasroot --nofork`   
+   로 실행을 하고 있는데 해당 명령어 뒤에 `--debug`를 추가하면 서버로 들어오는 패킷을 바로 볼 수 있다.   
+   `inspircd --runasroot --nofork --debug`   
+   이건 해도 되고 안 해도 되고 취향에 맞게 설정하면 된다.      
 
 
-### Reference
+### Reference   
 https://80000coding.oopy.io/1ac75b59-6930-4297-9c9d-7dec31eff19d
