@@ -27,6 +27,8 @@ make 규칙은 다음과 같이 정의해 놓았다.
 
    ### WARNING
    `make on`을 했을 때 백그라운드로 실행되게 해보려고 했지만 안돼서 결국 하나의 터미널은 점유하게 되니 '참고'하시면 됩니다.   
+   <br/>
+   M1 쓰는 사람의 경우 `make`하기 전에 `docker pull ubuntu`로 이미지를 받아와야 internal error가 발생하지 않음
 
 <br/>
 <br/>
